@@ -1,0 +1,62 @@
+name: Release
+
+on:
+  # Releases are cut by pushing a tag, the same way simc-addon does it.
+  # Prereleases use a tag the packager recognises, e.g. v12.1.0-alpha-01.
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Package and upload
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+        with:
+          # The packager builds the changelog from git history and derives the
+          # version from the nearest tag, so it needs the whole repository.
+          fetch-depth: 0
+
+      - name: Check the tag matches the TOC version
+        if: startsWith(github.ref, 'refs/tags/v')
+        run: |
+          tag="${GITHUB_REF_NAME#v}"
+          toc=$(sed -n 's/^## Version:[[:space:]]*//p' SimcOverride.toc | tr -d '\r')
+          if [ "$tag" != "$toc" ]; then
+            echo "::error file=SimcOverride.toc::Tag $GITHUB_REF_NAME does not match '## Version: $toc'. Bump the TOC and re-tag."
+            exit 1
+          fi
+          echo "Releasing $toc"
+
+      - name: Check the upload targets are configured
+        run: |
+          missing=""
+          for field in X-Curse-Project-ID X-Wago-ID; do
+            value=$(sed -n "s/^## ${field}:[[:space:]]*//p" SimcOverride.toc | tr -d '\r')
+            if [ -z "$value" ]; then
+              missing="$missing $field"
+            fi
+          done
+          if [ -n "$missing" ]; then
+            # The packager skips an upload target silently when its ID is blank,
+            # so say so here rather than letting the build go green having
+            # uploaded nothing.
+            echo "::warning file=SimcOverride.toc::Empty in the TOC:${missing}. Those uploads will be skipped."
+          fi
+
+      - name: WoW Packager
+        uses: BigWigsMods/packager@v2
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
+          GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}

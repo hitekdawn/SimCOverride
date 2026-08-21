@@ -1,0 +1,12 @@
+package-as: SimcOverride
+
+# No embedded libraries, so there is nothing for a nolib build to strip out.
+enable-nolib-creation: no
+
+# The TOC is hand-maintained; don't generate per-flavor copies of it.
+enable-toc-creation: no
+
+ignore:
+  - .github
+  - .pkgmeta
+  - DEVELOPERS.md

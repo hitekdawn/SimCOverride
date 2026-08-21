@@ -1,0 +1,23 @@
+## Interface: 120100
+## Title: SimC Override
+## Notes: Sim a different spec or talent build without respeccing. Adds spec and talent build overrides to the SimulationCraft /simc export for Raidbots.
+## IconTexture: Interface\AddOns\SimcOverride\logo.tga
+## Author: Korl
+## Version: 12.1.0-01
+## Dependencies: SimulationCraft
+## OptionalDeps: TalentLoadoutManager, TalentLoadoutsEx
+## SavedVariables: SimcOverrideDB
+## Category: Other
+## X-Curse-Project-ID: 1356941
+## X-Wago-ID: kGr0Wg6y
+
+core.lua
+compat.lua
+codec.lua
+rewrite.lua
+providers\registry.lua
+providers\tlm.lua
+providers\tlex.lua
+providers\blizzard.lua
+ui.lua
+hook.lua

@@ -1,0 +1,17 @@
+# Packager output (BigWigsMods/packager, the CurseForge build).
+.release/
+*.zip
+
+# Local copy of the packager, see DEVELOPERS.md.
+/release.sh
+
+# Hand-made backups from editing files in place.
+*.bak
+*.old
+
+# OS and editor cruft.
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+*.swp
