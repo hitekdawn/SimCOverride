@@ -1,4 +1,4 @@
-package-as: SimcOverride
+package-as: SimCOverride
 
 # No embedded libraries, so there is nothing for a nolib build to strip out.
 enable-nolib-creation: no

@@ -1,4 +1,4 @@
--- SimcOverride: TalentLoadoutsEx provider
+-- SimCOverride: TalentLoadoutsEx provider
 --
 -- TLEx has no usable API: _G.TLX.GetLoadedData() only returns the currently-active loadout and
 -- needs the talents UI to have been opened first. So we read its account-wide SavedVariable

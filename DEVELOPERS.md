@@ -1,5 +1,4 @@
-Release management
-==================
+# Release management
 
 Pushing a tag triggers a GitHub action that packages the addon, uploads it to
 CurseForge and Wago, and creates a GitHub release with the zip attached. Nothing
@@ -9,14 +8,12 @@ when you're ready.
 BigWigs packager does the work. It reads `.pkgmeta` for the layout and the
 `X-Curse-Project-ID` and `X-Wago-ID` fields in the TOC for where to upload.
 
+## Cutting a release
 
-Cutting a release
------------------
-
-1. Bump `## Version:` in `SimcOverride.toc`.
-2. Commit and push everything to `main`.
-3. Tag that commit with the same version, `v` in front, and push the tag.
-4. Watch the run in the repository's Actions tab.
+1.  Bump `## Version:` in `SimCOverride.toc`.
+2.  Commit and push everything to `main`.
+3.  Tag that commit with the same version, `v` in front, and push the tag.
+4.  Watch the run in the repository's Actions tab.
 
         # 1. bump the TOC, then
         git add .
@@ -33,9 +30,7 @@ Wait for the run to go green before you announce anything. CI checks both
 project IDs and both tokens before it packages anything, so a missing one stops
 the release rather than publishing to only one site.
 
-
-Versions
---------
+## Versions
 
 `## Version:` is the WoW patch the build targets, plus a build number:
 
@@ -57,9 +52,7 @@ and restart the build count:
 more than one. The packager reads it to decide which game versions to list the
 file under on CurseForge and Wago.
 
-
-Prereleases
------------
+## Prereleases
 
 Put `alpha` or `beta` in the version and the packager marks the upload as a
 prerelease instead of a release. Everything else is the same:
@@ -69,9 +62,7 @@ prerelease instead of a release. Everything else is the same:
 
 Anything without those words is a full release.
 
-
-Release notes
--------------
+## Release notes
 
 The packager writes `CHANGELOG.md` from the commit messages between the previous
 tag and this one, ships it inside the zip, and uses it for the release notes on
@@ -80,9 +71,7 @@ GitHub, CurseForge and Wago.
 Your commit subjects are what users read, so write them for that audience. There's
 no separate changelog file to maintain.
 
-
-When something goes wrong
--------------------------
+## When something goes wrong
 
 If the version check failed, the tag and the TOC disagree, and the error names
 both. Delete the tag, fix the TOC, and tag again:
@@ -100,9 +89,7 @@ If the upload already happened and the build is wrong, don't reuse the version.
 Bump to the next build number and release again. CurseForge and Wago both keep the
 bad file otherwise.
 
-
-Secrets
--------
+## Secrets
 
 Set these in the repository's Settings, under Secrets and variables > Actions.
 GitHub provides `GITHUB_TOKEN` automatically, so it needs nothing.
@@ -114,9 +101,7 @@ The workflow passes the CurseForge secret under two names. `packager@v2` reads
 `CF_API_KEY` and ignores `CF_API_TOKEN`, which is the name its master branch uses.
 Setting both means the upload keeps working whichever version the action resolves to.
 
-
-Testing the packaging locally
------------------------------
+## Testing the packaging locally
 
 You can run the packager by hand to see what would end up in the zip, without
 uploading anything:

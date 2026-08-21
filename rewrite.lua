@@ -1,4 +1,4 @@
--- SimcOverride: Rewrite
+-- SimCOverride: Rewrite
 -- Line-oriented transformation of a finished SimC profile, plus the checksum splice.
 
 local _, ns = ...
@@ -18,7 +18,7 @@ local SOURCE_NAMES = {
 -- Substitutions, in order: old spec token, new spec token, build label, source name, spec name.
 local BANNER = table.concat({
   "#",
-  "# ### SimcOverride ###",
+  "# ### SimCOverride ###",
   "# spec:    %s -> %s",
   "# talents: %s (%s)",
   "# ####################",

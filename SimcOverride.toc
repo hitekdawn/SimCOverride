@@ -1,12 +1,12 @@
 ## Interface: 120100
 ## Title: SimC Override
-## Notes: Sim a different spec or talent build without respeccing. Adds spec and talent build overrides to the SimulationCraft /simc export for Raidbots.
-## IconTexture: Interface\AddOns\SimcOverride\logo.tga
+## Notes: Adds spec and talent build overrides to the /simc export for Raidbots. Sim any build on your current gear, no respec needed.
+## IconTexture: Interface\AddOns\SimCOverride\logo.tga
 ## Author: Korl
 ## Version: 12.1.0-01
 ## Dependencies: SimulationCraft
 ## OptionalDeps: TalentLoadoutManager, TalentLoadoutsEx
-## SavedVariables: SimcOverrideDB
+## SavedVariables: SimCOverrideDB
 ## Category: Other
 ## X-Curse-Project-ID: 1356941
 ## X-Wago-ID: kGr0Wg6y

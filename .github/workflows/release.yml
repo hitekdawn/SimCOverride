@@ -1,11 +1,11 @@
 name: Release
 
 on:
-  # Releases are cut by pushing a tag, the same way simc-addon does it.
+  # Releases are cut by pushing a tag, the same way SimC-addon does it.
   # Prereleases use a tag the packager recognises, e.g. v12.1.0-alpha-01.
   push:
     tags:
-      - 'v*'
+      - "v*"
   workflow_dispatch:
 
 permissions:
@@ -31,9 +31,9 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/v')
         run: |
           tag="${GITHUB_REF_NAME#v}"
-          toc=$(sed -n 's/^## Version:[[:space:]]*//p' SimcOverride.toc | tr -d '\r')
+          toc=$(sed -n 's/^## Version:[[:space:]]*//p' SimCOverride.toc | tr -d '\r')
           if [ "$tag" != "$toc" ]; then
-            echo "::error file=SimcOverride.toc::Tag $GITHUB_REF_NAME does not match '## Version: $toc'. Bump the TOC and re-tag."
+            echo "::error file=SimCOverride.toc::Tag $GITHUB_REF_NAME does not match '## Version: $toc'. Bump the TOC and re-tag."
             exit 1
           fi
           echo "Releasing $toc"
@@ -48,7 +48,7 @@ jobs:
           # published, so a release is never half uploaded.
           missing=""
           for field in X-Curse-Project-ID X-Wago-ID; do
-            value=$(sed -n "s/^## ${field}:[[:space:]]*//p" SimcOverride.toc | tr -d '\r')
+            value=$(sed -n "s/^## ${field}:[[:space:]]*//p" SimCOverride.toc | tr -d '\r')
             if [ -z "$value" ]; then
               missing="$missing $field(TOC)"
             fi

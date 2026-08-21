@@ -1,4 +1,4 @@
--- SimcOverride: TalentLoadoutManager provider
+-- SimCOverride: TalentLoadoutManager provider
 --
 -- The primary source. TLM stores both mirrored Blizzard loadouts and its own custom ones (ids
 -- like "C_8"), and its export path reads only its own data plus LibTalentTree. It never calls

@@ -1,16 +1,16 @@
--- SimcOverride: Provider registry
+-- SimCOverride: Provider registry
 -- One interface, several backends (TalentLoadoutManager, TalentLoadoutsEx, Blizzard), merged
 -- into a single deduped list per spec.
 --
---- @class SimcOverrideProvider
+--- @class SimCOverrideProvider
 --- @field key             string   -- "tlm" | "tlex" | "blizzard"
 --- @field label           string   -- section title in the dropdown
 --- @field priority        number   -- lower wins on dedupe
 --- @field IsAvailable     fun(self):boolean
---- @field GetLoadouts     fun(self, specID:number):SimcOverrideLoadout[]
+--- @field GetLoadouts     fun(self, specID:number):SimCOverrideLoadout[]
 --- @field GetExportString fun(self, id:string|number, specID:number):string|nil, string|nil
 --
---- @class SimcOverrideLoadout
+--- @class SimCOverrideLoadout
 --- @field id     string|number
 --- @field name   string          -- already pipe-stripped
 --- @field source string

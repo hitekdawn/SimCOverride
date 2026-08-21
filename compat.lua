@@ -1,4 +1,4 @@
--- SimcOverride: Compat
+-- SimCOverride: Compat
 -- Reimplementations of SimulationCraft's file-local helpers.
 --
 -- Tokenize, TranslateRole and adler32 are all `local function`s inside SimC's core.lua, so

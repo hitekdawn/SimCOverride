@@ -1,4 +1,4 @@
--- SimcOverride: Blizzard provider
+-- SimCOverride: Blizzard provider
 --
 -- The floor: C_ClassTalents configs, plus a SavedVariables cross-spec cache for users with no
 -- loadout addon installed. WoW only exposes trait data for the spec you are currently in, so

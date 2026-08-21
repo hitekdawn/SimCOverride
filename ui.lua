@@ -1,4 +1,4 @@
--- SimcOverride: UI
+-- SimCOverride: UI
 -- A panel docked to the top edge of SimC's window.
 --
 -- The panel is a CHILD of SimcFrame, which gets us Show/Hide propagation, drag-follow and
@@ -122,7 +122,7 @@ function UI:Ensure()
   if self.panel or not _G.SimcFrame or not ns.DB.char then return end
   local parent = _G.SimcFrame
 
-  local p = CreateFrame("Frame", "SimcOverridePanel", parent, "BackdropTemplate")
+  local p = CreateFrame("Frame", "SimCOverridePanel", parent, "BackdropTemplate")
   p:SetHeight(PANEL_HEIGHT)
   p:SetFrameLevel(parent:GetFrameLevel() + 10)  -- so menus render above the dialog
   p:EnableMouse(true)                           -- swallow clicks; deliberately NOT draggable
@@ -134,7 +134,7 @@ function UI:Ensure()
   })
   self.panel = p
 
-  Label(p, "SimcOverride"):SetPoint("TOPLEFT", 12, -6)
+  Label(p, "SimCOverride"):SetPoint("TOPLEFT", 12, -6)
 
   -- Row 1: enable, spec, build
   local cb = CreateFrame("CheckButton", nil, p, "UICheckButtonTemplate")

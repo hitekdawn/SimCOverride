@@ -1,4 +1,4 @@
--- SimcOverride: Hook
+-- SimCOverride: Hook
 -- Interception of SimC's profile builder, plus the re-render path.
 --
 -- TalentLoadoutManager and TalentLoadoutsEx both post-hook Simulationcraft:PrintSimcProfile and

@@ -1,9 +1,9 @@
--- SimcOverride: Core
+-- SimCOverride: Core
 -- Namespace, saved variables, class/spec lookups and event plumbing.
 
 local _, ns = ...
 
-local PREFIX = "|cff33ff99SimcOverride|r: "
+local PREFIX = "|cff33ff99SimCOverride|r: "
 
 function ns.Print(...)
   print(PREFIX .. strjoin(" ", tostringall(...)))
@@ -21,7 +21,7 @@ end
 if not ns.Simc then
   ns.disabled = true
   C_Timer.After(5, function()
-    ns.Print("|cffff5555could not find the SimulationCraft addon; SimcOverride is inactive.|r")
+    ns.Print("|cffff5555could not find the SimulationCraft addon; SimCOverride is inactive.|r")
   end)
 end
 
@@ -85,8 +85,8 @@ ns.DB = {}
 -- Per-character record: enabled, specID, source ("tlm"|"tlex"|"blizzard"|"paste"), sourceID,
 -- sourceLabel, pasteString, pasteSpecID, and cache (the Blizzard provider's cross-spec store).
 local function InitDB()
-  SimcOverrideDB = SimcOverrideDB or {}
-  local db = SimcOverrideDB
+  SimCOverrideDB = SimCOverrideDB or {}
+  local db = SimCOverrideDB
   db.schema = db.schema or 1   -- stamped for future migrations
   db.chars = db.chars or {}
 

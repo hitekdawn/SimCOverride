@@ -1,4 +1,4 @@
--- SimcOverride: Codec
+-- SimCOverride: Codec
 -- Talent export strings: read the header, re-stamp the spec ID, check whether a string has any
 -- talents in it, and serialize a live C_Traits config as a fallback.
 --
