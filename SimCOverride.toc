@@ -3,7 +3,7 @@
 ## Notes: Adds spec and talent build overrides to the /simc export for Raidbots. Sim any build on your current gear, no respec needed.
 ## IconTexture: Interface\AddOns\SimCOverride\logo.tga
 ## Author: Korl
-## Version: 12.1.0-01
+## Version: 12.1.0-02
 ## Dependencies: SimulationCraft
 ## OptionalDeps: TalentLoadoutManager, TalentLoadoutsEx
 ## SavedVariables: SimCOverrideDB
