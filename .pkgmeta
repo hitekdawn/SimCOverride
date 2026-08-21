@@ -6,7 +6,9 @@ enable-nolib-creation: no
 # The TOC is hand-maintained; don't generate per-flavor copies of it.
 enable-toc-creation: no
 
+# The packager prunes every dotfile and dot-directory on its own (.git, .github,
+# .gitignore, .pkgmeta), so only the non-dot files that shouldn't ship are here.
 ignore:
-  - .github
-  - .pkgmeta
   - DEVELOPERS.md
+  # ~1.9 MB of README screenshots that only ever render on GitHub.
+  - docs
