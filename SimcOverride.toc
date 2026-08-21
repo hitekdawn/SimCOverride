@@ -3,7 +3,7 @@
 ## Notes: Sim a different spec or talent build without respeccing. Adds spec and talent build overrides to the SimulationCraft /simc export for Raidbots.
 ## IconTexture: Interface\AddOns\SimcOverride\logo.tga
 ## Author: Korl
-## Version: 12.1.0-alpha-01
+## Version: 12.1.0-alpha-02
 ## Dependencies: SimulationCraft
 ## OptionalDeps: TalentLoadoutManager, TalentLoadoutsEx
 ## SavedVariables: SimcOverrideDB

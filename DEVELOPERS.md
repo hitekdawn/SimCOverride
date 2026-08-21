@@ -29,9 +29,9 @@ Cutting a release
 
 The tag is what starts the release. Pushing the commit on its own does nothing.
 
-Wait for the run to go green before you announce anything. A missing token or
-project ID makes the packager skip that upload without failing the job, so the
-first time you release, open the log and confirm both sites got the file.
+Wait for the run to go green before you announce anything. CI checks both
+project IDs and both tokens before it packages anything, so a missing one stops
+the release rather than publishing to only one site.
 
 
 Versions
@@ -91,10 +91,10 @@ both. Delete the tag, fix the TOC, and tag again:
     git push --delete origin v12.1.0-02
     # fix ## Version:, commit, push, then re-tag
 
-If a site didn't get the file, the packager skipped it. It skips an upload target
-rather than failing when the token or project ID is missing, so the job still goes
-green. Open the run's log, look for a "Skipping upload to ..." line, then check the
-secret and the matching `X-...-ID` field in the TOC.
+If a site didn't get the file, open the run's log and look for a "Skipping upload
+to ..." line. The check above refuses to start a release when a token or project ID
+is missing, so a skip past that point usually means the site rejected the token or
+didn't recognise the ID.
 
 If the upload already happened and the build is wrong, don't reuse the version.
 Bump to the next build number and release again. CurseForge and Wago both keep the
@@ -109,6 +109,10 @@ GitHub provides `GITHUB_TOKEN` automatically, so it needs nothing.
 
     CF_API_TOKEN      https://legacy.curseforge.com/account/api-tokens
     WAGO_API_TOKEN    https://addons.wago.io/account/apikeys
+
+The workflow passes the CurseForge secret under two names. `packager@v2` reads
+`CF_API_KEY` and ignores `CF_API_TOKEN`, which is the name its master branch uses.
+Setting both means the upload keeps working whichever version the action resolves to.
 
 
 Testing the packaging locally

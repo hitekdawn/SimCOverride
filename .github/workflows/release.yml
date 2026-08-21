@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           # The packager builds the changelog from git history and derives the
           # version from the nearest tag, so it needs the whole repository.
@@ -39,24 +39,38 @@ jobs:
           echo "Releasing $toc"
 
       - name: Check the upload targets are configured
+        env:
+          CF_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          WAGO_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
         run: |
+          # The packager skips an upload target silently when its ID or token is
+          # missing, and still exits 0. Fail here instead, before anything is
+          # published, so a release is never half uploaded.
           missing=""
           for field in X-Curse-Project-ID X-Wago-ID; do
             value=$(sed -n "s/^## ${field}:[[:space:]]*//p" SimcOverride.toc | tr -d '\r')
             if [ -z "$value" ]; then
-              missing="$missing $field"
+              missing="$missing $field(TOC)"
             fi
           done
-          if [ -n "$missing" ]; then
-            # The packager skips an upload target silently when its ID is blank,
-            # so say so here rather than letting the build go green having
-            # uploaded nothing.
-            echo "::warning file=SimcOverride.toc::Empty in the TOC:${missing}. Those uploads will be skipped."
+          if [ -z "$CF_TOKEN" ]; then
+            missing="$missing CF_API_TOKEN(secret)"
           fi
+          if [ -z "$WAGO_TOKEN" ]; then
+            missing="$missing WAGO_API_TOKEN(secret)"
+          fi
+          if [ -n "$missing" ]; then
+            echo "::error::Not configured:${missing}. Those uploads would be skipped without failing, so stopping here."
+            exit 1
+          fi
+          echo "CurseForge and Wago are both configured."
 
       - name: WoW Packager
         uses: BigWigsMods/packager@v2
         env:
+          # packager@v2 reads CF_API_KEY only. CF_API_TOKEN is the name used on
+          # the packager's master branch, so both are set from the one secret.
+          CF_API_KEY: ${{ secrets.CF_API_TOKEN }}
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
           GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
